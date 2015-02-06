@@ -3,23 +3,84 @@ body {
   padding-top: 70px;
 }
 
+
+
 .jumbotron {
     margin-bottom: 0px;
-    background-image: url(http://www.travelandleisure.com/assets/images/2012-hpp-bali-high.jpg/variations/original.jpg);
+    
     background-position: 0% 25%;
     background-size: cover;
+    background-image: url("http://i.imgur.com/0AqLHxY.jpg");
+    background-position: 0% 25%;
     background-repeat: no-repeat;
     color: black;
     padding: 150px;
+    text-align: center;
 }
 
+.navbar {
+    background-color: #ACD8CB;
+    font-color: white;
+}
+
+.navbar-brand {
+  color: white;
+  letter-spacing: 3px;
+}
+
+.navbar-nav li a {
+  color: #05294F;
+
+}
+
+#loggedin {
+  color: white;
+  letter-spacing: 1px;
+}
 
 a {
   color: black;
 }
 
-#how-it-works button{
+#howitworks {
+  padding: 25px;
+  font-size: 16px;
+  text-align: left;
+}
 
+.btn {
+  color: white;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+
+
+.btn-primary.btn-outline:hover {
+  color: white;
+}
+
+.search {
+  position: relative;
+  width: 600px;
+  margin-left: 260px;
+}
+
+.searchbutton {
+  float: left;
+  margin-left: -20px;
+}
+
+#result-list {
+  color: black;
 }
 
 
@@ -59,5 +120,29 @@ a {
 .choose-image {
   margin-left: 15px;
 }
+
+.form {
+  float: right;
+  margin-top: -622px;
+}
+
+.submit-form {
+  margin-left: 15px;
+}
+
+/*user profile */
+.line {    
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 2px;
+    width: 60%;
+  }
+
+  .badge a {
+    color: white;
+    font-weight: lighter;
+  }
 
 

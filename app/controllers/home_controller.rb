@@ -16,6 +16,7 @@ class HomeController < ApplicationController
   end
 
   def show
+    @article = Article.new
     if params[:search] != nil
       @results = GooglePlacesApi.query(params[:search])
     end

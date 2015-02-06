@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 	def update		
 		authorize @comment
 		if @comment.update(comment_params)
-			redirect_to @comment
+			redirect_to @article
 		else
 			render :edit
 		end
