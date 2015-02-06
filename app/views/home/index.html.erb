@@ -1,9 +1,11 @@
 <div class="jumbotron">
+  
+<br/><br/>
 <!-- TITLE: Image in custom.css -->
-  <h1>Travelogue</h1>
-  <p>Your destination for peer reviews</p>
+  <h1 style="letter-spacing:4px; color: white; font-size: 100px;  ">TRAVELOGUE</h1>
+  <p style="font-size: 30px">Your trip heard around the world</p>
 
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-outline" data-toggle="modal" data-target="#myModal">
   How it works
 </button>
 
@@ -11,11 +13,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">How it works</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">How it Works</h4>
       </div>
       <!-- Add padding to this text -->
-      <p>Travelogue is a social networking and blogging web application where users can share their travel experiences, advice, and photos. Users/travelers can search by destination and read what other users are posting about that location using the Google Places API.</p>  
+      <p id="howitworks">Travelogue is a shared diary where people can talk about their travel experiences, advice, and photos. Search by destination and dive into dialogue of where you and other wanderlusts plan to take a trip or have already traveled!</p>  
       <div class="modal-footer">
         <button type="button" class="close" data-dismiss="modal">Close</button>
       </div>
@@ -25,13 +27,27 @@
 
 <!-- SEARCH BOX -->
 <%= form_tag home_index_path, :method => 'get', class: 'form-group' do %>
-  <p>
-    <%= label_tag :search %>
-    <%= text_field_tag :search, params[:search], class: 'form-control' %>
-    <%= submit_tag "Search", class: "btn btn-warning btn-lg", :placeholder => "e.g. Tokyo museums, Seattle cafes, Dublin pubs, etc." %>
-  </p>
+<br/>
+  <div class="search">
+    <p class='col-sm-9'>
+      <%= text_field_tag :search, params[:search], class: 'form-control', :placeholder => "e.g. Tokyo museums, Seattle cafes, etc." %>
+    </p>
+
+    <div class="searchbutton">
+     <p class='col-sm-1'> 
+      <%= submit_tag "Search", class: "btn btn-warning btn-primary" %>
+    </p>
+    </div>
+    <br/><br/>
+  
+  </div>
+
 <% end %>
+<br/><br/><br/>
 </div>
+
+
+
 
 <!-- LEFT SIDE -->
 <div class="col-sm-9">
@@ -41,10 +57,10 @@
     <!-- LIST ALL SEARCH RESULTS -->
       <% @results['results'].each do |r| %>
         <div class="list-group-item">
-          <h4 class="list-group-item-heading"><%= link_to r['name'], r['place_id'].to_s %></h4>
+          <h4 class="list-group-item-heading" id="result-list"><%= link_to r['name'], r['place_id'].to_s %></h4>
           <p class="list-group-item-text">
             <%= r['formatted_address'] %>
-            <%= link_to "Add Article", new_article_path, class: "btn btn-info" %>
+            
           </p>
         </div>
       <% end %>
@@ -53,13 +69,15 @@
 </div>
 
 <!-- RIGHT SIDEBAR -->
+<div class="right-sidebar">
 
 <div class="col-sm-3">
   <!-- LIST OF CURRENT LOCATIONS WITH ARTICLES -->
   <div class="list-group">
-    <a href="" class="list-group-item active">Quick Nav</a>
+    <a href="" class="list-group-item list-group-item-info">RECENT SEARCHES</a>
       <% @locations.each do |location| %>
       <%= link_to location, articles_path(location: location), class: "list-group-item" %>
       <% end %>
   </div>
+</div>
 </div>

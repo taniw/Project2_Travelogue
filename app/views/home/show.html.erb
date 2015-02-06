@@ -1,29 +1,124 @@
-<h1><%= @details['result']['name'] %></h1>
 <div class="col-sm-6">
-	<p><%= @details['result']['formatted_address'] %></p>
+
+<h1 style="font-size: 50px; color: #E36D2D"><%= @details['result']['name'] %></h1>
+
+	<p style="font-size: 14px"><b><%= @details['result']['formatted_address'] %></b></p>
+
+	<hr style="border-width:2px; width: 105%">
 	<p>
-		<em>Type: </em>
+		<b>Type:</b>
 		<% @details['result']['types'].each do |t| %>
 			<%= t %>
 		<% end %>
-	</p>
+	</p>	
+	
 	<p>
-		Rating: <%= @details['result']['rating'] %>
-	</p>
+		<b>Rating:</b> <%= @details['result']['rating'] %>
+	</p>	
+		
 	<p>
-		Price Level: <%= @details['result']['price_level'] %>
+		<b>Price Level:</b> <%= @details['result']['price_level'] %>
 	</p>
 </div>
-<p>
-	<span><%= link_to "Add Article", new_article_path, class: "btn btn-info" %></span>
-</p>
+
 
 <div class="">
 	<iframe 
-			width="600",
+		width="600",
   		height="450",
   		frameborder="3",
-  		style="border: solid 3px black",
+  		style="border: solid 3px #E36D2D",
   		src="https://www.google.com/maps/embed/v1/place?key=
   		<%= API_KEY %>&q=<%= @details['result']['name'] %>" ></iframe>
 </div>
+
+
+<!-- Form -->
+
+<div class="form">
+<%= form_for @article, :html => { :multipart => true } do |a| %>
+
+
+<span class="input input--minoru">
+	<%= a.text_field :location, class: "input__field input__field--yoko", id: "input-18", value: @details['result']['name'] %>
+		<label class="input__label input__label--yoko" for="input-18">
+			<span class="input__label-content input__label-content--yoko"><%= a.label :location %></span>
+		</label>
+</span>
+
+<br/>
+
+<span class="input input--minoru">
+	<%= a.text_field :title, class: "input__field input__field--yoko", id: "input-16" %>
+	<label class="input__label input__label--yoko" for="input-16">
+		<span class="input__label-content input__label-content--yoko"><%= a.label :title %> </span>
+	</label>
+</span>
+
+<br/>
+
+<span class="input input--minoru">
+	<%= a.text_area :body, cols: "30", rows: "10", class: "input__field input__field--yoko", id: "input-17" %>
+	<label class="input__label input__label--yoko" for="input-17" id="ryan">
+		<span class="input__label-content input__label-content--yoko"><%= a.label :body %> </span>
+	</label>
+</span>
+
+
+<br/><br/>
+
+<div class="form-group">
+  
+  <div class="choose-image"><%= a.file_field :image %></div>
+
+  <div class="line-separator"></div>
+  
+  <span class="imagelabel"><%= a.label :image %></span>
+	
+</div>
+
+<br/>
+
+<div class="submit-form"><%= a.submit 'Submit', class: "btn btn-primary" %></div>
+
+<% end %>
+
+</div>
+
+
+
+
+<!-- Script -->
+
+<script src="js/classie.js"></script>
+<script>
+	(function() {
+		// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+		if (!String.prototype.trim) {
+			(function() {
+				// Make sure we trim BOM and NBSP
+				var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+				String.prototype.trim = function() {
+					return this.replace(rtrim, '');
+				};
+			})();
+		}
+		[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+			// in case the input is already filled..
+			if( inputEl.value.trim() !== '' ) {
+				classie.add( inputEl.parentNode, 'input--filled' );
+			}
+			// events:
+			inputEl.addEventListener( 'focus', onInputFocus );
+			inputEl.addEventListener( 'blur', onInputBlur );
+		} );
+		function onInputFocus( ev ) {
+			classie.add( ev.target.parentNode, 'input--filled' );
+		}
+		function onInputBlur( ev ) {
+			if( ev.target.value.trim() === '' ) {
+				classie.remove( ev.target.parentNode, 'input--filled' );
+			}
+		}
+	})();
+</script>

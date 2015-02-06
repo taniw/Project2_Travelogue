@@ -3,6 +3,8 @@ require 'uri'
 class ArticlesController < ApplicationController
 	before_action :find_article, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!
+	skip_before_filter  :verify_authenticity_token;
+	skip_before_action :verify_authenticity_token;
 	
 	def index		
 		if params[:location].present?
@@ -31,6 +33,7 @@ class ArticlesController < ApplicationController
 
 	def show
 		@article = Article.find(params[:id])
+
 	end
 
 	def edit

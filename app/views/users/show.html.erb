@@ -1,32 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+
+</head>
+<body>
+
 <br/><br/>
 
 <div class="profile">
 
-<%= image_tag @user.avatar.url(:medium) %>
+	<div class="profile-pic"><%= image_tag @user.avatar.url(:medium) %></div>
 <!-- <h4>Email: <%= @user.email %> </h4> -->
 
 <h1>Hello, <%= @user.email %>!</h1>
 
+<hr class="line" />
 
+<h3>Check out your Entries</h3>
 
-<br>
+<div id="list">
 
-<h3>Check out your Articles</h3>
 <% @user.articles.each do |r| %>
-<li><%= link_to r.title, r %></li>
+
+<li><%= link_to r.title, r %> <a class="kill" id= '<%= r.id %>' >Delete</a></li>
+<!-- <li><%= link_to r.title, r %> <a href="/articles/<%= r.id %>" data-method="delete" id="kill">Delete</a></li> -->
 <% end %>
+</div>
 
-
-
-<br/><br/>
-
-<%= link_to "Back", :back, class: "btn btn-primary" %>
-<% if user_signed_in? %>
-		
-        <%= link_to 'Edit profile', edit_user_registration_path, class: "btn btn-primary" %>
-        <%= link_to 'Logout', destroy_user_session_path, method: 'DELETE', class: "btn btn-primary" %>
-         
- <% end %>
 
  </div>
 
+
+
+</body>
+</html>
+	<script type="text/javascript">
+
+	
+		$(document).ready(
+			function() {
+				$('.kill').on('click', function(){
+						whatever = this;
+						parent = whatever.parentElement;
+						var identity= this.id;
+						var route = '/articles/' + identity;
+						$(parent).hide();
+						$.ajax(route , {
+						type: 'DELETE',
+						dataType: 'json',
+						})
+					})
+			});
+
+
+	</script>
